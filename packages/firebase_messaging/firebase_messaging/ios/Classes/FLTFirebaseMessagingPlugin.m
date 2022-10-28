@@ -411,7 +411,7 @@ NSString *const kMessagingPresentationOptionsUserDefaults =
 - (void)application:(NSApplication *)application
     didReceiveRemoteNotification:(NSDictionary *)userInfo {
   // Only handle notifications from FCM.
-  if (userInfo[@"gcm.message_id"]) {
+  // if (userInfo[@"gcm.message_id"]) {
     NSDictionary *notificationDict =
         [FLTFirebaseMessagingPlugin remoteMessageUserInfoToDict:userInfo];
 
@@ -420,7 +420,7 @@ NSString *const kMessagingPresentationOptionsUserDefaults =
     } else {
       [_channel invokeMethod:@"Messaging#onBackgroundMessage" arguments:notificationDict];
     }
-  }
+  // }
 }
 #endif
 
@@ -438,7 +438,7 @@ NSString *const kMessagingPresentationOptionsUserDefaults =
   NSDictionary *notificationDict =
       [FLTFirebaseMessagingPlugin remoteMessageUserInfoToDict:userInfo];
   // Only handle notifications from FCM.
-  if (userInfo[@"gcm.message_id"]) {
+  // if (userInfo[@"gcm.message_id"]) {
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
       __block BOOL completed = NO;
 
@@ -489,15 +489,15 @@ NSString *const kMessagingPresentationOptionsUserDefaults =
     } else {
       // If "alert" (i.e. notification) is present in userInfo, this will be called by the other
       // "Messaging#onMessage" channel handler
-      if (userInfo[@"aps"] != nil && userInfo[@"aps"][@"alert"] == nil) {
+      // if (userInfo[@"aps"] != nil && userInfo[@"aps"][@"alert"] == nil) {
         [_channel invokeMethod:@"Messaging#onMessage" arguments:notificationDict];
-      }
+      // }
       completionHandler(UIBackgroundFetchResultNoData);
     }
 
     return YES;
-  }  // if (userInfo[@"gcm.message_id"])
-  return NO;
+  // }  // if (userInfo[@"gcm.message_id"])
+  // return NO;
 }  // didReceiveRemoteNotification
 #endif
 
